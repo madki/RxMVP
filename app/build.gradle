@@ -1,0 +1,118 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'me.tatarka.retrolambda'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    //Use Java 8 Compiler
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        applicationId "xyz.madki.rxmvp"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+ext {
+    supportLibVersion = '23.1.1'
+    espressoVersion = '2.2.1'
+    runnerVersion = '0.4.1'
+    jrawVersion = '0.8.0'
+    bundlerVersion = '0.1.1'
+    mortarVersion = '0.20'
+    icepickVersion = '3.2.0'
+    rxBindingVersion = '0.4.0'
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.1.1'
+
+    // Logging
+    compile 'com.jakewharton.timber:timber:4.1.0'
+    // butter knife
+    compile 'com.jakewharton:butterknife:7.0.1'
+
+    // Networking and Parsing
+    compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
+    compile 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
+    compile 'com.squareup.retrofit:adapter-rxjava:2.0.0-beta2'
+    compile 'com.squareup.okhttp:logging-interceptor:2.6.0'
+
+    compile 'com.squareup.okio:okio:1.6.0'
+    compile 'com.squareup.okhttp:okhttp:2.5.0'
+    compile 'com.google.code.gson:gson:2.4'
+
+    compile 'com.squareup.picasso:picasso:2.5.2'
+
+    // Models
+    compile 'me.tatarka:auto-parcel-gson:0.1'
+    apt 'me.tatarka:auto-parcel-gson-processor:0.1'
+
+    // Icepick
+    compile "frankiesardo:icepick:${icepickVersion}"
+    provided "frankiesardo:icepick-processor:${icepickVersion}"
+
+    // Rx
+    compile 'io.reactivex:rxjava:1.0.16'
+    compile 'io.reactivex:rxandroid:1.1.0'
+
+    compile "com.jakewharton.rxbinding:rxbinding:${rxBindingVersion}"
+    compile "com.jakewharton.rxbinding:rxbinding-support-v4:${rxBindingVersion}"
+    compile "com.jakewharton.rxbinding:rxbinding-appcompat-v7:${rxBindingVersion}"
+    compile "com.jakewharton.rxbinding:rxbinding-recyclerview-v7:${rxBindingVersion}"
+
+
+    // Dagger
+    compile 'com.google.dagger:dagger:2.0.1'
+    apt "com.google.dagger:dagger-compiler:2.0.1"
+    compile 'org.glassfish:javax.annotation:10.0-b28'
+
+    // Mortar
+    compile "com.squareup.mortar:mortar:$mortarVersion"
+
+    // Support Library
+    compile "com.android.support:appcompat-v7:$supportLibVersion"
+    compile "com.android.support:cardview-v7:$supportLibVersion"
+    compile "com.android.support:recyclerview-v7:$supportLibVersion"
+    compile "com.android.support:support-annotations:$supportLibVersion"
+}
+
+/*RETRO LAMBDA*/
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'me.tatarka:gradle-retrolambda:3.2.4'
+    }
+}
+// Required because retrolambda is on maven central
+repositories {
+    mavenCentral()
+    maven {url "https://clojars.org/repo/"}
+}
+
+retrolambda {
+    jdk JAVA8_HOME
+    oldJdk JAVA7_HOME
+    javaVersion JavaVersion.VERSION_1_7
+    defaultMethods false
+    incremental true
+}
