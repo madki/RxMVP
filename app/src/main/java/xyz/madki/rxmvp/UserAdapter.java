@@ -64,7 +64,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.Holder> {
       ButterKnife.bind(this, itemView);
 
       RxView.clicks(close)
-              .map(aVoid -> getAdapterPosition())
+              .map(aVoid -> getAdapterPosition());
     }
 
     public Observable<Integer> getCloseClickStream() {
