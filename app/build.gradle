@@ -18,6 +18,7 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
@@ -28,7 +29,7 @@ android {
 }
 
 ext {
-    supportLibVersion = '23.1.1'
+    supportLibVersion = '23.2.0'
     espressoVersion = '2.2.1'
     runnerVersion = '0.4.1'
     jrawVersion = '0.8.0'
@@ -41,7 +42,6 @@ ext {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.1.1'
 
     // Logging
     compile 'com.jakewharton.timber:timber:4.1.0'
@@ -76,7 +76,6 @@ dependencies {
     compile "com.jakewharton.rxbinding:rxbinding-support-v4:${rxBindingVersion}"
     compile "com.jakewharton.rxbinding:rxbinding-appcompat-v7:${rxBindingVersion}"
     compile "com.jakewharton.rxbinding:rxbinding-recyclerview-v7:${rxBindingVersion}"
-
 
     // Dagger
     compile 'com.google.dagger:dagger:2.0.1'
